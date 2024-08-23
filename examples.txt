@@ -1,0 +1,3 @@
+urn:tei:purl:prod.example.com:pkg:alpm/arch/containers-common@1:0.47.4-4?arch=x86_64
+urn:tei:uuid:prod2.example.com:7bdb4424-612f-11ef-947e-1a52914d44b3
+urn:tei:ean:prod3.example.com:978020137962
