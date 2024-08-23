@@ -47,3 +47,19 @@ def test_bad(capsys, request):
         print("\nDEBUG {}: output: \n{}\n"
                 .format(request.node.name, captured.out))
     assert tvalid is False
+
+def test_bad_02(capsys, request):
+    """Test bad TEI with bare URL."""
+    import os
+    import sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from lib.teiparse import valid
+
+    tei="https://google.com"
+
+    tvalid = valid(tei, True)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print("\nDEBUG {}: output: \n{}\n"
+                .format(request.node.name, captured.out))
+    assert tvalid is False
