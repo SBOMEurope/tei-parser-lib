@@ -22,7 +22,7 @@ jobs:
       - name: Install test dependencies
         run: pip install pytest pytest-md pytest-emoji
       - name: Install app dependencies
-        run: pip install urnparse
+        run: pip install urnparse packageurl-python
       - uses: pavelzw/pytest-action@v2
         with:
           emoji: false
