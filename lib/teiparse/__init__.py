@@ -1,15 +1,25 @@
-"""The TEI - Transparency Exchange Identifier - parsing library"""
+"""The TEI - Transparency Exchange Identifier - parsing library
+(C) Copyright Olle E. Johansson, Edvina AB - oej@edvina.net
+"""
 
 
-def parse_tei(
+def valid(
         tei: str,
         debug: bool
         ):
     """Parse a TEI.
 
     Return FALSE if it's not a valid syntax."""
+    from urnparse import URN8141, InvalidURNFormatError
 
+    try:
+        urn = URN8141.from_string(tei)
+    except InvalidURNFormatError:
+        print("Invalid format.\n")
+        return False
     if debug:
-        print("Got this URN: {}\n".format(tei))
-
+        print("DEBUG: Got this URN: {}\n".format(tei))
+        print("- Namespace ID {}\n".format(urn.namespace_id))
+        print("- specific parts: {}\n".format(urn.specific_string.parts))
+        print("- Query part: {}\n".format(urn.rqf_component.query))
     return True
