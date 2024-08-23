@@ -15,7 +15,12 @@ def valid(
     try:
         urn = URN8141.from_string(tei)
     except InvalidURNFormatError:
-        print("Invalid format.\n")
+        if debug:
+            print("DEBUG: Invalid format (InvalidURNFormatError)\n")
+        return False
+    except AttributeError:
+        if debug:
+            print("DEBUG: Invalid format (attribute error)\n")
         return False
     if debug:
         print("DEBUG: Got this URN: {}\n".format(tei))

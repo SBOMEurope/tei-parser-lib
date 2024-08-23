@@ -33,6 +33,10 @@ def main():
     parser.add_argument('-d', '--debug',
                         action="store_true",
                         help='Turn on debug output for developers')
+    parser.add_argument('-t', '--tei',
+                        nargs='*',
+                        type=str,
+                        help='TEI URN to process')
     args = parser.parse_args()
     # Parse and set debug early
     if args.debug:
@@ -40,12 +44,13 @@ def main():
         print("DEBUG: Debugging enabled.")
     if args.help:
         parser.print_help()
-        help_sign_commands(ca_config, debug)
         sys.exit(0)
-    
-    tei = "urn:tei:uuid:prod2.example.com:7bdb4424-612f-11ef-947e-1a52914d44b3"
+    if args.tei is not None:
+        tei = args.tei
+    else:
+        tei = "urn:tei:uuid:prod2.example.com:7bdb4424-612f-11ef-947e-1a52914d44b3"
     if not testtei(tei, debug):
-        print("ERROR: Invalid TEI: {}\n".format(tei))
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
