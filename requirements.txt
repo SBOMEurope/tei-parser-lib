@@ -1,0 +1,2 @@
+urnparse==0.2.2
+packageurl-python==0.9.9
