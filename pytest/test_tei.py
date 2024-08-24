@@ -48,6 +48,26 @@ def test_bad(capsys, request):
                 .format(request.node.name, captured.out))
     assert tvalid is False
 
+def test_bad_01(capsys, request):
+    """Test bad TEI. URN type ISDN"""
+    import os
+    import sys
+    import re
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from lib.teiparse import valid
+
+    tei="urn:isbn:0-486-27557-4"
+
+    tvalid = valid(tei, True)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print("\nDEBUG {}: output: \n{}\n"
+                .format(request.node.name, captured.out))
+    assert tvalid is False
+    assert re.search(
+        "DEBUG: Invalid URN namespace",
+        captured.out) is not None
+
 def test_bad_02(capsys, request):
     """Test bad TEI with bare URL."""
     import os

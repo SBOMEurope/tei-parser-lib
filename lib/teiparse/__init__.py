@@ -56,6 +56,12 @@ def valid(
         print("- Namespace ID {}\n".format(urn.namespace_id))
         print("- specific parts: {}\n".format(urn.specific_string.parts))
         print("- Query part: {}\n".format(urn.rqf_component.query))
+    if urn.namespace_id != "tei":
+        if debug:
+            print(
+                "DEBUG: Invalid URN namespace ({})\n"
+                .format(urn.namespace_id))
+        return False
     if urn.specific_string.parts[0] == "purl":
         if debug:
             print("DEBUG: Checking PURL syntax")
