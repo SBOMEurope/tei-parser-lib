@@ -22,6 +22,50 @@ optional arguments:
 
 There are some examples of TEI URNs in the file example.txt
 
+## TEI types
+
+The following TEI types are supported:
+
+### TEI UUID
+
+Syntax:
+
+```text
+urn:tei:uuid:<domain or host>:<uuid>
+````
+
+Has to be a valid UUID
+
+### TEI PURL
+
+Syntax:
+
+```text
+urn:tei:uuid:<domain or host>:<purl>
+````
+
+### TEI SWID
+
+Syntax:
+
+```text
+urn:tei:swid:<domain or host>:<swid>
+````
+
+Note that there is a TEI SWID type as well as a PURL SWID type. 
+
+### TEI HASH
+
+Supports the following hash values:
+
+* SHA256
+* SHA384
+* SHA512
+
+```text
+urn:tei:hash:<domain or host>:<hashtype>:<hash>
+````
+
 ## References
 
 - URNParse https://pypi.org/project/urnparse/
