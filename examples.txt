@@ -1,3 +1,4 @@
 urn:tei:purl:prod.example.com:pkg:alpm/arch/containers-common@1:0.47.4-4?arch=x86_64
 urn:tei:uuid:prod2.example.com:7bdb4424-612f-11ef-947e-1a52914d44b3
 urn:tei:ean:prod3.example.com:978020137962
+urn:tei:swid:prod2.example.com:Acme/example.com/Enterprise+Server@1.0.0?tag_id=75b8c285-fa7b-485b-b199-4745e3004d0d

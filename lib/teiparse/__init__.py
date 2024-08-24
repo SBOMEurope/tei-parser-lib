@@ -4,6 +4,21 @@
 SPDX-License-Identifier: BSD
 """
 
+def check_tei_type(type: str, debug: bool):
+    """Check for a supported TEI type."""
+    ttype = [
+        "purl",
+        "uuid",
+        "hash",
+        "swid"
+    ]
+    if type in ttype:
+        return True
+    if debug:
+        print("DEBUG: TEI type not supported: {}".format(type))
+    return False
+    
+
 def valid_purl(purl: str, debug: bool):
     """Check if the PURL is valid.
     Specification: https://github.com/package-url/purl-spec
@@ -61,6 +76,8 @@ def valid(
             print(
                 "DEBUG: Invalid URN namespace ({})\n"
                 .format(urn.namespace_id))
+        return False
+    if not check_tei_type(urn.specific_string.parts[0], debug):
         return False
     if urn.specific_string.parts[0] == "purl":
         if debug:
