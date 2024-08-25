@@ -4,6 +4,7 @@
 SPDX-License-Identifier: BSD
 """
 
+
 def check_tei_type(type: str, debug: bool):
     """Check for a supported TEI type."""
     ttype = [
@@ -17,7 +18,7 @@ def check_tei_type(type: str, debug: bool):
     if debug:
         print("DEBUG: TEI type not supported: {}".format(type))
     return False
-    
+
 
 def valid_purl(purl: str, debug: bool):
     """Check if the PURL is valid.
@@ -26,8 +27,8 @@ def valid_purl(purl: str, debug: bool):
     Sample syntax:
     urn:tei:purl:prod.example.com:pkg:alpm/arch/containers-common@1:0.47.4-4?arch=x86_64
 
-    we need to remove the four first parts separated by : and get the rest, including
-    colons
+    we need to remove the four first parts separated by :
+    and get the rest, including colons
 
     Using https://github.com/package-url/packageurl-python
     """
@@ -54,7 +55,6 @@ def valid(
 
     Return FALSE if it's not a valid syntax."""
     from urnparse import URN8141, InvalidURNFormatError
-    
 
     try:
         urn = URN8141.from_string(tei)
@@ -82,9 +82,9 @@ def valid(
     if urn.specific_string.parts[0] == "purl":
         if debug:
             print("DEBUG: Checking PURL syntax")
-        #Calculate where PURL begins
+        # Calculate where PURL begins
         start = len("urn:tei:purl:")
-        start += len(urn.specific_string.parts[1]) +1
+        start += len(urn.specific_string.parts[1]) + 1
         if not valid_purl(tei[start:], debug):
             return False
     return True
