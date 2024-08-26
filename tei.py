@@ -7,7 +7,8 @@ For testing."""
 import argparse
 import sys
 
-def testtei(tei:str, debug:bool):
+
+def testtei(tei: str, debug: bool):
     """Test a single TEI"""
     from lib.teiparse import valid
 
@@ -18,6 +19,7 @@ def testtei(tei:str, debug:bool):
         return False
     print("--- Congratulations! TEI is valid.")
     return True
+
 
 def main():
     """Run the command line TEI parser."""
@@ -48,9 +50,11 @@ def main():
     if args.tei is not None:
         tei = args.tei
     else:
-        tei = "urn:tei:uuid:prod2.example.com:7bdb4424-612f-11ef-947e-1a52914d44b3"
+        tei = "urn:tei:uuid:prod2.example.com:" \
+            "7bdb4424-612f-11ef-947e-1a52914d44b3"
     if not testtei(tei, debug):
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
