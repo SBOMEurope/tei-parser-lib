@@ -1,7 +1,7 @@
 # A simple library to validate different TEI URI syntaxes
 
 TEI is a Transparency Exchange Identifier. See
-https://github.com/CycloneDX/transparency-exchange-api/tree/main/discovery
+GITHUB [https://github.com/CycloneDX/transparency-exchange-api/tree/main/discovery]
 for details.
 
 Created by Olle E. Johansson, Edvina AB, oej@edvina.net
@@ -52,7 +52,7 @@ Syntax:
 urn:tei:swid:<domain or host>:<swid>
 ````
 
-Note that there is a TEI SWID type as well as a PURL SWID type. 
+Note that there is a TEI SWID type as well as a PURL SWID type.
 
 ### TEI HASH
 
@@ -68,4 +68,4 @@ urn:tei:hash:<domain or host>:<hashtype>:<hash>
 
 ## References
 
-- URNParse https://pypi.org/project/urnparse/
+* URNParse <https://pypi.org/project/urnparse/>
