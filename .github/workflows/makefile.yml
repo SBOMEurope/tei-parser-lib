@@ -43,6 +43,10 @@ jobs:
         with:
           name: tei-coverage
           path: artifact
+      - uses: actions/upload-artifact@master
+        with:
+          name: tei-coverage-html
+          path: htmlcov
 
   coverage:
       needs: test
