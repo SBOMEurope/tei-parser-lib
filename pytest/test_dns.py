@@ -68,3 +68,20 @@ def test_dns_03(capsys, request):
             "\nDEBUG {}: output: \n{}\n"
             .format(request.node.name, captured.out))
     assert dnsres.recordexist is False
+
+def test_dns_04(capsys, request):
+    """Test basic DNS class URI lookup with good example"""
+    from lib.teiparse.dnslookup import dnslookup
+
+    name = "uriprod.product.edvina.org"
+
+    # Just initiate the object, do not query anything
+    dnsres = dnslookup(name=name, debug=True)
+    dnsres.lookup_tei_uri(name=name)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print("DEBUG: DNS object: {}".format(dnsres))
+        print(
+            "\nDEBUG {}: output: \n{}\n"
+            .format(request.node.name, captured.out))
+    assert dnsres.recordexist is False

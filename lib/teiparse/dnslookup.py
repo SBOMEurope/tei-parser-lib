@@ -94,6 +94,11 @@ class dnslookup():
                     rdata.preference, "\n")
         return True
 
+    def lookup_tei_uri(self, name):
+        """Lookup TEI uri with prefix _tei._tcp"""
+        prefix = "_tei._tcp."
+        return self.lookup_uri(prefix + name)
+
     def lookup(self):
         """Query DNS for data.
 
