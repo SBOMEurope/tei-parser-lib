@@ -19,6 +19,33 @@ def check_tei_type(type: str, debug: bool):
         print("DEBUG: TEI type not supported: {}".format(type))
     return False
 
+def valid_hash(hashtype: str, teihash: str, debug: bool):
+    """Check if the TEI hash URN is valid.
+
+    Sample syntax:
+    urn:tei:hash:teapot.example.com:sha256:00480065006C006C006F00200077006F0072006C00640021
+
+    the hash value needs to be in hex code
+    """
+    htype = [
+        "sha256",
+        "sha384",
+        "sha512"
+    ]
+    if hashtype not in htype:
+        if debug:
+            print("DEBUG: Invalid hash type: {}\n".format(hashtype))
+        return True
+    try:
+        val = int(teihash, 16)
+    except ValueError:
+        if debug:
+            print("DEBUG: Hash is not a hex value: {}\n".format(teihash))
+        return False
+    if debug:
+        print("DEBUG: Valid TEI hash {}: {}".format(hashtype, teihash))
+    return True
+
 
 def valid_purl(purl: str, debug: bool):
     """Check if the PURL is valid.
@@ -79,12 +106,30 @@ def valid(
         return False
     if not check_tei_type(urn.specific_string.parts[0], debug):
         return False
+    # Check the length of the domain part
+    domlen = len(urn.specific_string.parts[1])
+    if domlen == 0:
+        if debug:
+            print("ERROR: No domain part given.")
+            return False
     if urn.specific_string.parts[0] == "purl":
         if debug:
             print("DEBUG: Checking PURL syntax")
         # Calculate where PURL begins
         start = len("urn:tei:purl:")
-        start += len(urn.specific_string.parts[1]) + 1
+        #remove the domain
+        start += domlen + 1
         if not valid_purl(tei[start:], debug):
             return False
+        return True
+    if urn.specific_string.parts[0] == "hash":
+        # Hash type tei:hash:<domain>:hashtype:<hash>
+        hashtype = urn.specific_string.parts[2]
+        if not valid_hash(
+            hashtype=hashtype,
+            teihash = urn.specific_string.parts[3],
+            debug = debug):
+            return False
+        return True
+
     return True
