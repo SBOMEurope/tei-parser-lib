@@ -43,7 +43,7 @@ def valid_purl(purl: str, debug: bool):
             print("ERROR: {}".format(err))
         return False
     if debug:
-        print("DEBUG: PURL {}\n".format(repr(purlobj)))
+        print("DEBUG: Valid PURL {}\n".format(repr(purlobj)))
     return True
 
 
