@@ -1,2 +1,3 @@
 urnparse==0.2.2
 packageurl-python==0.9.9
+dnspython==2.6.1

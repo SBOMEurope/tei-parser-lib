@@ -24,7 +24,7 @@ jobs:
       - name: Install test dependencies
         run: pip install pytest pytest-md pytest-emoji pytest-cov
       - name: Install app dependencies
-        run: pip install urnparse packageurl-python
+        run: pip install urnparse packageurl-python dnspython
       - uses: pavelzw/pytest-action@v2
         with:
           emoji: false
@@ -43,6 +43,10 @@ jobs:
         with:
           name: tei-coverage
           path: artifact
+      - uses: actions/upload-artifact@master
+        with:
+          name: tei-coverage-html
+          path: htmlcov
 
   coverage:
       needs: test
