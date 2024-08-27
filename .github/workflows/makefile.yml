@@ -47,18 +47,3 @@ jobs:
         with:
           name: tei-coverage-html
           path: htmlcov
-
-  coverage:
-      needs: test
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/download-artifact@master
-          with:
-            name: tei-coverage
-            path: artifact
-        - run: cat artifact/coverage.xml
-        - name: Get Cover 
-          uses: orgoro/coverage@v3.2
-          with:
-              coverageFile: artifact/coverage.xml
-              token: ${{ secrets.GITHUB_TOKEN }}
