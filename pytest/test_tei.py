@@ -117,10 +117,7 @@ def test_bad_02(capsys, request):
 
 def test_bad_03(capsys, request):
     """Test bad TEI with bad type"""
-    import os
-    import sys
     import re
-    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
     from lib.teiparse import valid
 
     tei = "urn:tei:gurka:prod2.example.com:" \
@@ -135,4 +132,63 @@ def test_bad_03(capsys, request):
     assert tvalid is False
     assert re.search(
         "DEBUG: TEI type not supported",
+        captured.out) is not None
+
+
+def test_bad_03(capsys, request):
+    """Test bad TEI with no domain."""
+    import re
+    from lib.teiparse import valid
+
+    tei = "urn:tei:hash::" \
+        "7bdb4424-612f-11ef-947e-1a52914d44b3"
+
+    tvalid = valid(tei, True)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print(
+            "\nDEBUG {}: output: \n{}\n"
+            .format(request.node.name, captured.out))
+    assert tvalid is False
+    assert re.search(
+        "ERROR: No domain part given.",
+        captured.out) is not None
+
+
+def test_hash_00(capsys, request):
+    """Test with invalid hash."""
+    import re
+    from lib.teiparse import valid
+
+    tei = "urn:tei:hash:prod2.example.com:sha256:" \
+        "7bdb4424-612f-11ef-947e-1a52914d44b3"
+
+    tvalid = valid(tei, True)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print(
+            "\nDEBUG {}: output: \n{}\n"
+            .format(request.node.name, captured.out))
+    assert tvalid is False
+    assert re.search(
+        "Hash is not a hex value",
+        captured.out) is not None
+
+def test_hash_01(capsys, request):
+    """Test with valid hash."""
+    import re
+    from lib.teiparse import valid
+
+    tei = "urn:tei:hash:prod2.example.com:sha256:" \
+        "726e11c73d62bbc3b7c3f68d25fe98dd8d8de90fb159cfa0a624efed5437435f"
+
+    tvalid = valid(tei, True)
+    captured = capsys.readouterr()
+    with capsys.disabled():
+        print(
+            "\nDEBUG {}: output: \n{}\n"
+            .format(request.node.name, captured.out))
+    assert tvalid is True
+    assert re.search(
+        "DEBUG: Valid TEI hash sha256:",
         captured.out) is not None
